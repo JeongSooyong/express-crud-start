@@ -1,0 +1,18 @@
+services:
+  db:
+    image: postgres:17
+    container_name: board-db
+    environment:
+      POSTGRES_USER: board
+      POSTGRES_PASSWORD: board1234
+      POSTGRES_DB: board
+      TZ: Asia/Seoul
+    ports:
+      - "15432:5432"
+    volumes:
+      - board-data:/var/lib/postgresql/data
+      - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql
+    restart: unless-stopped
+
+volumes:
+  board-data:
