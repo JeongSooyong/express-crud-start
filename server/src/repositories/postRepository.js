@@ -13,3 +13,14 @@ export async function findAll() {
   // 결과 반환
   return result.rows; // 조회된 행들 (배열)
 }
+
+// 글 상세 조회
+export async function findById(id) {
+  const sql = `
+    SELECT id, title, content, author, view_count, created_at, updated_at
+      FROM posts
+     WHERE id = $1
+  `;
+  const result = await pool.query(sql, [id]);
+  return result.rows[0]; 
+}
