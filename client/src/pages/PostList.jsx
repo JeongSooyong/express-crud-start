@@ -7,6 +7,10 @@ import { fetchPosts, getErrorMessage } from '../api/posts.js'
 import { formatDate } from '../utils.js'
 // 날짜를 보기 좋은 형식으로 변환해주는 함수 임포트
 
+import { Link } from 'react-router-dom'
+// 라우터 링크를 사용하기 위한 임포트
+// href는 페이지를 새로고침하지만, Link는 SPA 방식으로 페이지 전환
+
 export default function PostList() {
   // 화면에 필요한 상태 3개
   const [posts, setPosts] = useState([])        // 글 목록
@@ -50,7 +54,7 @@ export default function PostList() {
             {posts.map((post) => (
               <tr key={post.id}>
                 <td className="col-num">{post.id}</td>
-                <td>{post.title}</td>
+                <td><Link to={`/posts/${post.id}`}>{post.title}</Link></td>
                 <td className="col-author">{post.author}</td>
                 <td className="col-date">{formatDate(post.created_at)}</td>
                 <td className="col-num">{post.view_count}</td>
